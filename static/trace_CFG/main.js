@@ -1279,6 +1279,8 @@ function highlightUERs(UERtype){
                 graph_to_display = graphlibDot.parse(modifiedDotFile);
 
 
+                clearGlobalElement('#text_code');
+                // clearGlobalElement('#graphContainer');
                 showGraph(isTraceSupplied);
                 loopify_dagre.addBackground();
 
@@ -2035,6 +2037,7 @@ function highlightUERs(UERtype){
 
     var svg = d3.select("#graphContainer");
     var inner = d3.select("#graphContainer g");
+    clearInnerElement(inner);
 
     // Render the graphlib object using d3.
     var renderer = new dagreD3.Renderer();
@@ -3276,6 +3279,7 @@ function highlightUERs(UERtype){
       return a.firstInstr - b.firstInstr; 
     });
 
+    // add the codeblocks to the right panel
     d3.select("#text_code")
       .selectAll("p")
       .data(codes)
@@ -3454,5 +3458,12 @@ function highlightUERs(UERtype){
   }
 
 
+  function clearGlobalElement(id) {
+    clearInnerElement(d3.select(id));
+  }
+
+  function clearInnerElement(element) {
+    element.selectAll("*").remove();
+  }
   
 // }
